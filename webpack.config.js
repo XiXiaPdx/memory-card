@@ -35,6 +35,17 @@ module.exports = {
   module: {
     rules: [
       {
+       test: /\.js$/,
+       exclude: [
+         /node_modules/,
+         /spec/
+       ],
+       loader: "babel-loader",
+       options: {
+         presets: ['es2015']
+       }
+     },
+      {
         test: /\.css$/,
         use: [
           'style-loader',
