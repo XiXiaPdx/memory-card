@@ -10,6 +10,7 @@ import body from '../images/body.svg';
 
 
 let main = document.querySelector('#main');
+let cardsFragment = document.createDocumentFragment();
 
 
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
@@ -79,10 +80,10 @@ function dealCards(cardNumber, index) {
   let cardImage = findCard(cardNumber);
   let cardElement = createCard(cardImage);
   cardElement.style.gridArea = gridAreaArray[index];
-  main.appendChild(cardElement);
-
+  cardsFragment.appendChild(cardElement);
 }
 
 shuffleCards();
 
 allCards.forEach(dealCards);
+main.appendChild(cardsFragment);
