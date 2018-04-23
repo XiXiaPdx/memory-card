@@ -8,8 +8,8 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 200px 200px;
   grid-template-areas:
-  "x y z"
-  "a b c";
+  "X Y Z"
+  "A B C";
   font-size: 3em;
 }
 

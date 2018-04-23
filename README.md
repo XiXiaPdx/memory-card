@@ -23,8 +23,8 @@ it works, grid area must be strings, not numbers.  Associate 0-15 array with alp
 
 Test:
 
-switch statement flow 1-8 show different image? Yes, it works. 
+switch statement flow 1-8 show different image? Yes, it works.
 
-- Whatever card is at 0 goes to A. And so on until 15.
+- create img element, give it image with find card, put that img element to appropriate grid area based on arrayIndex:alpahbet A-P
 
-Test:
+This will be a loop, i in loop is index of array (which is also grid area)

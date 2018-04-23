@@ -17,6 +17,7 @@ xMarkImage.style.gridArea = "z";
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
 
 let allCards = new Array (16);
+let gridAreaArray = "ABCDEFGHIJKLMNOP".split("");
 
 //random number
 function getRandomInt() {
@@ -34,7 +35,6 @@ function shuffleCards () {
       allCards[arrayIndex] = c;
     }
   }
-  console.log(allCards);
 }
 
 function findCard(cardNumber){
@@ -68,5 +68,22 @@ function findCard(cardNumber){
   return selectedCard;
 }
 
+function createCard(cardImage){
+  let cardElement;
+  //create img element
+  // make its src cardImage
+  return cardElement;
+}
+
+function dealCards(cardNumber, index) {
+  console.log(index+" "+cardNumber);
+  let cardImage = findCard(cardNumber);
+  let cardElement = createCard(cardImage);
+
+}
+
 shuffleCards();
+
+allCards.forEach(dealCards);
+
 xMarkImage.src = findCard(allCards[2]);
