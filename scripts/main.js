@@ -8,10 +8,8 @@ import eyes from '../images/eyes.svg';
 import circleX from '../images/circleX.svg';
 import body from '../images/body.svg';
 
-let xMarkImage = document.querySelector('#xMark');
-xMarkImage.src = xMark;
 
-xMarkImage.style.gridArea = "z";
+let main = document.querySelector('#main');
 
 
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
@@ -71,19 +69,20 @@ function findCard(cardNumber){
 function createCard(cardImage){
   let cardElement;
   //create img element
+  cardElement = document.createElement('img');
   // make its src cardImage
+  cardElement.src = cardImage;
   return cardElement;
 }
 
 function dealCards(cardNumber, index) {
-  console.log(index+" "+cardNumber);
   let cardImage = findCard(cardNumber);
   let cardElement = createCard(cardImage);
+  cardElement.style.gridArea = gridAreaArray[index];
+  main.appendChild(cardElement);
 
 }
 
 shuffleCards();
 
 allCards.forEach(dealCards);
-
-xMarkImage.src = findCard(allCards[2]);

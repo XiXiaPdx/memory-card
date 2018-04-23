@@ -28,3 +28,19 @@ switch statement flow 1-8 show different image? Yes, it works.
 - create img element, give it image with find card, put that img element to appropriate grid area based on arrayIndex:alpahbet A-P
 
 This will be a loop, i in loop is index of array (which is also grid area)
+
+We can use the .createDocumentFragment() method to create an empty DocumentFragment object. This code should be very familiar to you, because it looks so very similar to document.createElement().
+
+const myDocFrag = document.createDocumentFragment();
+Let's rewrite our code to use a DocumentFragment instead of the <div>.
+
+const fragment = document.createDocumentFragment();  // ← uses a DocumentFragment instead of a <div>
+
+for (let i = 0; i < 200; i++) {
+    const newElement = document.createElement('p');
+    newElement.innerText = 'This is paragraph number ' + i;
+
+    fragment.appendChild(newElement);
+}
+
+document.body.appendChild(fragment); // reflow and repaint here -- once!

@@ -5,15 +5,19 @@ body {
 
 #main {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 200px 200px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 200px 200px 200px 200px;
   grid-template-areas:
-  "X Y Z"
-  "A B C";
+  "A B C D"
+  "E F G H"
+  "I J K L"
+  "M N O P";
   font-size: 3em;
 }
 
-#xMark {
+img {
+  width: 22vh;
+  height: 22vh;
   background-color: grey;
   display: inline-grid;
 }
