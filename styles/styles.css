@@ -1,7 +1,19 @@
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 #main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 200px 200px;
+  grid-template-areas:
+  "x y z"
+  "a b c";
   font-size: 3em;
 }
 
-img {
+#xMark {
   background-color: grey;
+  display: inline-grid;
 }
