@@ -44,3 +44,6 @@ for (let i = 0; i < 200; i++) {
 }
 
 document.body.appendChild(fragment); // reflow and repaint here -- once!
+
+how do I hide the card?
+show blank svg for card backside

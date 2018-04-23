@@ -16,8 +16,14 @@ body {
 }
 
 img {
+  backface-visibility: hidden;
   width: 22vh;
   height: 22vh;
   background-color: grey;
-  display: inline-grid;
+  transform-style: preserve-3d;
+  transition: all 0.5s linear;
+}
+
+img:hover {
+  transform: rotateY(180deg);
 }

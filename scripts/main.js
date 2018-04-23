@@ -7,6 +7,7 @@ import five from '../images/five.svg';
 import eyes from '../images/eyes.svg';
 import circleX from '../images/circleX.svg';
 import body from '../images/body.svg';
+import turn from '../images/turn.svg';
 
 
 let main = document.querySelector('#main');
@@ -68,12 +69,19 @@ function findCard(cardNumber){
 }
 
 function createCard(cardImage){
-  let cardElement;
   //create img element
-  cardElement = document.createElement('img');
+  let cardElement = document.createElement('img');
+  // create back img element
+  let backCardElement = document.createElement('img');
   // make its src cardImage
   cardElement.src = cardImage;
-  return cardElement;
+  backCardElement.src = turn;
+  // create card div
+  let cardDiv = document.createElement('div');
+  cardDiv.appendChild(backCardElement);
+  cardDiv.appendChild(cardElement);
+  cardDiv.classList.toggle('.cardContainer');
+  return cardDiv;
 }
 
 function dealCards(cardNumber, index) {
