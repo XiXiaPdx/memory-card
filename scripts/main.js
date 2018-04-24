@@ -68,6 +68,11 @@ function findCard(cardNumber){
   return selectedCard;
 }
 
+let flipCard = function flipCard(e){
+  console.log(e)
+  e.path[1].classList.toggle('flip');
+}
+
 function createCard(cardImage){
   //create img element
   let cardElement = document.createElement('img');
@@ -79,16 +84,9 @@ function createCard(cardImage){
   cardElement.classList.toggle('front');
   backCardElement.classList.toggle('back');
   //add click listner to back of cardDiv
-  backCardElement.addEventListener('click', function (e) {
-    console.log(e);
-    e.path[1].classList.toggle('flip');
-  });
+  backCardElement.addEventListener('click', flipCard);
   // add click listner to flick front card backface
-  cardElement.addEventListener('click', function (e) {
-    console.log(e);
-    e.path[1].classList.toggle('flip');
-  });
-
+  cardElement.addEventListener('click', flipCard);
   // create card div
   let cardDiv = document.createElement('div');
   cardDiv.appendChild(cardElement);
