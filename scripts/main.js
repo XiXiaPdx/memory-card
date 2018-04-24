@@ -83,6 +83,12 @@ function createCard(cardImage){
     console.log(e);
     e.path[1].classList.toggle('flip');
   });
+  // add click listner to flick front card backface
+  cardElement.addEventListener('click', function (e) {
+    console.log(e);
+    e.path[1].classList.toggle('flip');
+  });
+
   // create card div
   let cardDiv = document.createElement('div');
   cardDiv.appendChild(cardElement);

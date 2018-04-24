@@ -33,12 +33,13 @@ img {
 
 
 .front {
+
 }
 
 .cardContainer {
   transform-origin: right center;
   transform-style: preserve-3d;
-  transition: all 0.5s linear;
+  transition: all 0.2s linear;
 }
 
 .cardContainer.flip{
