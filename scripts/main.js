@@ -19,6 +19,10 @@ let cardsFragment = document.createDocumentFragment();
 let allCards = new Array (16);
 let gridAreaArray = "ABCDEFGHIJKLMNOP".split("");
 
+//track state of game, store first and second card flipped
+let firstCardFlipped;
+// let secondCardFlipped;
+
 //random number
 function getRandomInt() {
   return Math.floor(Math.random() * Math.floor(16));
@@ -68,9 +72,23 @@ function findCard(cardNumber){
   return selectedCard;
 }
 
-let flipCard = function flipCard(e){
+function flipCard (cardElement){
+  cardElement.classList.toggle('flip');
+  if (firstCardFlipped === undefined){
+
+    //using the Grid Area style on the element clicked, working back to the card stored in the card array for this position.
+    let cardArrayPosition = gridAreaArray.indexOf(cardElement.style.gridArea.charAt(0));
+    //using that position, access allCards and find actual card. Make firstCardFlipped be that card ... allCards have numbers associated with the cards. So we can just match numbers.
+    firstCardFlipped = allCards[cardArrayPosition];
+    console.log ("after" +firstCardFlipped);
+  }
+}
+
+let matchCard = function matchCard(e){
   console.log(e)
-  e.path[1].classList.toggle('flip');
+  //flip the card
+  flipCard(e.path[1]);
+
 }
 
 function createCard(cardImage){
@@ -84,9 +102,9 @@ function createCard(cardImage){
   cardElement.classList.toggle('front');
   backCardElement.classList.toggle('back');
   //add click listner to back of cardDiv
-  backCardElement.addEventListener('click', flipCard);
+  backCardElement.addEventListener('click', matchCard);
   // add click listner to flick front card backface
-  cardElement.addEventListener('click', flipCard);
+  cardElement.addEventListener('click', matchCard);
   // create card div
   let cardDiv = document.createElement('div');
   cardDiv.appendChild(cardElement);
