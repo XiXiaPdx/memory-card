@@ -76,11 +76,18 @@ function createCard(cardImage){
   // make its src cardImage
   cardElement.src = cardImage;
   backCardElement.src = turn;
+  cardElement.classList.toggle('front');
+  backCardElement.classList.toggle('back');
+  //add click listner to back of cardDiv
+  backCardElement.addEventListener('click', function (e) {
+    console.log(e);
+    e.path[1].classList.toggle('flip');
+  });
   // create card div
   let cardDiv = document.createElement('div');
-  cardDiv.appendChild(backCardElement);
   cardDiv.appendChild(cardElement);
-  cardDiv.classList.toggle('.cardContainer');
+  cardDiv.appendChild(backCardElement);
+  cardDiv.classList.toggle('cardContainer');
   return cardDiv;
 }
 

@@ -7,23 +7,40 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 200px 200px 200px 200px;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
   grid-template-areas:
   "A B C D"
   "E F G H"
   "I J K L"
   "M N O P";
   font-size: 3em;
+  perspective: 800px;
 }
 
 img {
-  backface-visibility: hidden;
-  width: 22vh;
-  height: 22vh;
+  width:100%;
+  height: 100%;
   background-color: grey;
+  position: absolute;
   transform-style: preserve-3d;
   transition: all 0.5s linear;
 }
 
-img:hover {
-  transform: rotateY(180deg);
+.back {
+  backface-visibility: hidden;
+}
+
+
+.front {
+}
+
+.cardContainer {
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  transition: all 0.5s linear;
+}
+
+.cardContainer.flip{
+  transform: translateX( -100% ) rotateY(180deg);
 }
