@@ -21,17 +21,20 @@ let gridAreaArray = "ABCDEFGHIJKLMNOP".split("");
 
 //track state of game, store first and second card flipped
 
-function CardFlipped (cardGridArea, cardFaceValue){
-  this.cardFaceValue = cardFaceValue;
-  this.cardGridArea = cardGridArea;
+function CardFlipped (){
+  this.cardFaceValue = null;
+  this.cardGridArea = null;
+  this.cardDiv = null;
 }
 
 CardFlipped.prototype.reset = function (){
   this.cardFaceValue = null;
   this.cardGridArea = null;
+  this.cardDiv = null;
 }
 
-let firstCardFlipped = new CardFlipped(null, null);
+let firstCardFlipped = new CardFlipped();
+let secondCardFlipped = new CardFlipped();
 
 // let secondCardFlipped;
 
@@ -51,6 +54,13 @@ function shuffleCards () {
       allCards[arrayIndex] = c;
     }
   }
+}
+
+function resetCards (){
+  firstCardFlipped.cardDiv.classList.toggle('flip');
+  secondCardFlipped.cardDiv.classList.toggle('flip');
+  firstCardFlipped.reset();
+  secondCardFlipped.reset();
 }
 
 function findCard(cardNumber){
@@ -88,7 +98,6 @@ function findCardFlipped (cardElement){
   //using the Grid Area style on the element clicked, working back to the card stored in the card array for this position.
   let cardArrayPosition = gridAreaArray.indexOf(cardElement.style.gridArea.charAt(0));
   //return css grid area value of card that was flipped
-
   return cardArrayPosition;
 }
 
@@ -96,27 +105,39 @@ function flipCard (cardElement){
   cardElement.classList.toggle('flip');
   if (firstCardFlipped.cardGridArea === null){
     //store the front face value of the card flipped. use later for matching checking.
-    firstCardFlipped.cardGridArea = findCardFlipped(cardElement)
+    firstCardFlipped.cardGridArea = findCardFlipped(cardElement);
     firstCardFlipped.cardFaceValue = allCards[firstCardFlipped.cardGridArea];
+    firstCardFlipped.cardDiv = cardElement;
     //exit function since this is the first card being flipped.
-    console.log(firstCardFlipped.cardFaceValue);
-    console.log(firstCardFlipped.cardGridArea);
     return;
   }
   // first card has flipped.  Is this second card different or the same one?
   if (firstCardFlipped.cardGridArea === findCardFlipped(cardElement)){
     // same card, reset firstCardFlipped Object
     firstCardFlipped.reset();
+  } else{
+    //create second card object
+    secondCardFlipped.cardGridArea = findCardFlipped(cardElement);
+    secondCardFlipped.cardFaceValue = allCards[secondCardFlipped.cardGridArea];
+    secondCardFlipped.cardDiv = cardElement;
+    //check if two cards match
+    if (firstCardFlipped.cardFaceValue === secondCardFlipped.cardFaceValue) {
+    //remove the click listner
+    console.log ('matching');
+    } else {
+    // the cards don't match. flip them back.
+    resetCards();
     console.log(firstCardFlipped);
+    console.log(secondCardFlipped);  
+    }
 
   }
 }
 
+
 let matchCard = function matchCard(e){
-  console.log(e)
   //flip the card
   flipCard(e.path[1]);
-
 }
 
 function createCard(cardImage){
