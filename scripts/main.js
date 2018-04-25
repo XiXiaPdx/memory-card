@@ -20,7 +20,19 @@ let allCards = new Array (16);
 let gridAreaArray = "ABCDEFGHIJKLMNOP".split("");
 
 //track state of game, store first and second card flipped
-let firstCardFlipped;
+
+function CardFlipped (cardGridArea, cardFaceValue){
+  this.cardFaceValue = cardFaceValue;
+  this.cardGridArea = cardGridArea;
+}
+
+CardFlipped.prototype.reset = function (){
+  this.cardFaceValue = null;
+  this.cardGridArea = null;
+}
+
+let firstCardFlipped = new CardFlipped(null, null);
+
 // let secondCardFlipped;
 
 //random number
@@ -72,15 +84,31 @@ function findCard(cardNumber){
   return selectedCard;
 }
 
+function findCardFlipped (cardElement){
+  //using the Grid Area style on the element clicked, working back to the card stored in the card array for this position.
+  let cardArrayPosition = gridAreaArray.indexOf(cardElement.style.gridArea.charAt(0));
+  //return css grid area value of card that was flipped
+
+  return cardArrayPosition;
+}
+
 function flipCard (cardElement){
   cardElement.classList.toggle('flip');
-  if (firstCardFlipped === undefined){
+  if (firstCardFlipped.cardGridArea === null){
+    //store the front face value of the card flipped. use later for matching checking.
+    firstCardFlipped.cardGridArea = findCardFlipped(cardElement)
+    firstCardFlipped.cardFaceValue = allCards[firstCardFlipped.cardGridArea];
+    //exit function since this is the first card being flipped.
+    console.log(firstCardFlipped.cardFaceValue);
+    console.log(firstCardFlipped.cardGridArea);
+    return;
+  }
+  // first card has flipped.  Is this second card different or the same one?
+  if (firstCardFlipped.cardGridArea === findCardFlipped(cardElement)){
+    // same card, reset firstCardFlipped Object
+    firstCardFlipped.reset();
+    console.log(firstCardFlipped);
 
-    //using the Grid Area style on the element clicked, working back to the card stored in the card array for this position.
-    let cardArrayPosition = gridAreaArray.indexOf(cardElement.style.gridArea.charAt(0));
-    //using that position, access allCards and find actual card. Make firstCardFlipped be that card ... allCards have numbers associated with the cards. So we can just match numbers.
-    firstCardFlipped = allCards[cardArrayPosition];
-    console.log ("after" +firstCardFlipped);
   }
 }
 
