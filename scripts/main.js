@@ -11,6 +11,7 @@ import turn from '../images/turn.svg';
 
 
 let main = document.querySelector('#main');
+// let gameInfo = document.querySelector('#gameInfo');
 let cardsFragment = document.createDocumentFragment();
 
 
@@ -122,13 +123,13 @@ function flipCard (cardElement){
     secondCardFlipped.cardDiv = cardElement;
     //check if two cards match
     if (firstCardFlipped.cardFaceValue === secondCardFlipped.cardFaceValue) {
-    //remove the click listner
+    //remove the match card click listner
     console.log ('matching');
     } else {
     // the cards don't match. flip them back.
-    //second card, add end of aninmation listner
-    // once option fixed a bug where the listner would trigger itself in loop.
+    //second card, add end of aninmation listner to delay the flip back
     cardElement.addEventListener('transitionend', delayFlip);
+
     }
   }
 }
@@ -138,7 +139,7 @@ let delayFlip = function (e){
   if(!cardElement.classList.contains('delay')){
     cardElement.classList.toggle('delay');
   } else {
-    //second transition has happened
+    //delay transition has happened
     cardElement.removeEventListener('transitionend', delayFlip);
     cardElement.classList.toggle('delay');
     resetCards();
