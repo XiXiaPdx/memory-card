@@ -42,6 +42,12 @@ img {
   transition: all 0.2s linear;
 }
 
-.cardContainer.flip{
+.flip{
   transform: translateX( -100% ) rotateY(180deg);
+}
+
+.delay {
+  transition: all 0.2s linear;
+  transition-delay: 1s;
+  transform: rotateX(0deg);
 }

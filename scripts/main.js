@@ -126,14 +126,24 @@ function flipCard (cardElement){
     console.log ('matching');
     } else {
     // the cards don't match. flip them back.
-    resetCards();
-    console.log(firstCardFlipped);
-    console.log(secondCardFlipped);  
+    //second card, add end of aninmation listner
+    // once option fixed a bug where the listner would trigger itself in loop.
+    cardElement.addEventListener('transitionend', delayFlip);
     }
-
   }
 }
 
+let delayFlip = function (e){
+  let cardElement = e.srcElement
+  if(!cardElement.classList.contains('delay')){
+    cardElement.classList.toggle('delay');
+  } else {
+    //second transition has happened
+    cardElement.removeEventListener('transitionend', delayFlip);
+    cardElement.classList.toggle('delay');
+    resetCards();
+  }
+}
 
 let matchCard = function matchCard(e){
   //flip the card
