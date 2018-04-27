@@ -95,6 +95,15 @@ function findCard(cardNumber){
   return selectedCard;
 }
 
+function matchFound(firstCard, secondCard){
+  console.log(firstCard.cardDiv.children);
+  console.log(secondCard.cardDiv.children);
+ for (let i = 0; i < firstCard.cardDiv.children.length; ++i ){
+   firstCard.cardDiv.children[i].removeEventListener('click', matchCard);
+   secondCard.cardDiv.children[i].removeEventListener('click', matchCard);
+ }
+}
+
 function findCardFlipped (cardElement){
   //using the Grid Area style on the element clicked, working back to the card stored in the card array for this position.
   let cardArrayPosition = gridAreaArray.indexOf(cardElement.style.gridArea.charAt(0));
@@ -124,7 +133,8 @@ function flipCard (cardElement){
     //check if two cards match
     if (firstCardFlipped.cardFaceValue === secondCardFlipped.cardFaceValue) {
     //remove the match card click listner
-    console.log ('matching');
+    matchFound(firstCardFlipped, secondCardFlipped);
+
     } else {
     // the cards don't match. flip them back.
     //second card, add end of aninmation listner to delay the flip back
