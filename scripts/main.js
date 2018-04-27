@@ -153,10 +153,12 @@ let delayFlip = function (e){
   let cardElement = e.srcElement
   if(!cardElement.classList.contains('delay')){
     cardElement.classList.toggle('delay');
+    firstCardFlipped.cardDiv.classList.toggle('delay');
   } else {
     //delay transition has happened
     cardElement.removeEventListener('transitionend', delayFlip);
     cardElement.classList.toggle('delay');
+    firstCardFlipped.cardDiv.classList.toggle('delay');
     resetCards();
   }
 }
