@@ -112,6 +112,10 @@ function findCardFlipped (cardElement){
 }
 
 function flipCard (cardElement){
+  if (firstCardFlipped.cardDiv !== null & secondCardFlipped.cardDiv !== null){
+    //don't allow flipping to happen
+    return;
+  }
   cardElement.classList.toggle('flip');
   if (firstCardFlipped.cardGridArea === null){
     //store the front face value of the card flipped. use later for matching checking.
