@@ -53,5 +53,5 @@ img {
 .delay {
   transition: all 0.2s linear;
   transition-delay: 0.6s;
-  transform: rotateX(0deg);
+  transform: rotateX(80deg);
 }

@@ -96,12 +96,13 @@ function findCard(cardNumber){
 }
 
 function matchFound(firstCard, secondCard){
-  console.log(firstCard.cardDiv.children);
-  console.log(secondCard.cardDiv.children);
  for (let i = 0; i < firstCard.cardDiv.children.length; ++i ){
    firstCard.cardDiv.children[i].removeEventListener('click', matchCard);
    secondCard.cardDiv.children[i].removeEventListener('click', matchCard);
  }
+ //reset cards, otherwise no cards can be flipped after a match
+ firstCard.reset();
+ secondCard.reset();
 }
 
 function findCardFlipped (cardElement){
