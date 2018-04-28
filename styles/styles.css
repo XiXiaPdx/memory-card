@@ -27,6 +27,14 @@ body {
   grid-area: h0;
 }
 
+.counter {
+  display: inline;
+}
+
+#moveCounterLabel {
+  font-size: 0.5em;
+}
+
 img {
   width:100%;
   height: 100%;

@@ -16,6 +16,7 @@ let main = document.querySelector('#main');
 let starOne = document.querySelector('#starOne');
 let starTwo = document.querySelector('#starTwo');
 let starThree = document.querySelector('#starThree');
+let moveCounterLabel = document.querySelector('#moveCounterLabel');
 // let gameInfo = document.querySelector('#gameInfo');
 let cardsFragment = document.createDocumentFragment();
 
@@ -41,7 +42,8 @@ CardFlipped.prototype.reset = function (){
 let firstCardFlipped = new CardFlipped();
 let secondCardFlipped = new CardFlipped();
 
-// let secondCardFlipped;
+//flip moves
+let numberOfFlips = 0;
 
 //random number
 function getRandomInt() {
@@ -122,16 +124,21 @@ function flipCard (cardElement){
     return;
   }
   cardElement.classList.toggle('flip');
+  ++numberOfFlips;
+  setFlipsAndStars()
   if (firstCardFlipped.cardGridArea === null){
     //store the front face value of the card flipped. use later for matching checking.
     firstCardFlipped.cardGridArea = findCardFlipped(cardElement);
     firstCardFlipped.cardFaceValue = allCards[firstCardFlipped.cardGridArea];
     firstCardFlipped.cardDiv = cardElement;
+
     //exit function since this is the first card being flipped.
     return;
   }
   // first card has flipped.  Is this second card different or the same one?
   if (firstCardFlipped.cardGridArea === findCardFlipped(cardElement)){
+    --numberOfFlips;
+    setFlipsAndStars()
     // same card, reset firstCardFlipped Object
     firstCardFlipped.reset();
   } else{
@@ -139,6 +146,7 @@ function flipCard (cardElement){
     secondCardFlipped.cardGridArea = findCardFlipped(cardElement);
     secondCardFlipped.cardFaceValue = allCards[secondCardFlipped.cardGridArea];
     secondCardFlipped.cardDiv = cardElement;
+
     //check if two cards match
     if (firstCardFlipped.cardFaceValue === secondCardFlipped.cardFaceValue) {
     //remove the match card click listner
@@ -201,15 +209,16 @@ function dealCards(cardNumber, index) {
   cardsFragment.appendChild(cardElement);
 }
 
-function setStars(){
+function setFlipsAndStars(){
+  moveCounterLabel.innerText = "Flips: "+numberOfFlips;
   emptyStar;
   starOne.src = fullStar;
   starTwo.src = fullStar;
-  starThree.src = fullStar;  
+  starThree.src = fullStar;
 }
 
 //sets up new game
 shuffleCards();
 allCards.forEach(dealCards);
 main.appendChild(cardsFragment);
-setStars();
+setFlipsAndStars();
