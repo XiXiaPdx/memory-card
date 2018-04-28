@@ -13,10 +13,12 @@ import fullStar from '../images/fullStar.svg';
 
 
 let main = document.querySelector('#main');
-let starOne = document.querySelector('#starOne');
-let starTwo = document.querySelector('#starTwo');
-let starThree = document.querySelector('#starThree');
+// let starOne = document.querySelector('#starOne');
+// let starTwo = document.querySelector('#starTwo');
+// let starThree = document.querySelector('#starThree');
 let moveCounterLabel = document.querySelector('#moveCounterLabel');
+let starElements = document.querySelectorAll('.star');
+
 // let gameInfo = document.querySelector('#gameInfo');
 let cardsFragment = document.createDocumentFragment();
 
@@ -211,10 +213,32 @@ function dealCards(cardNumber, index) {
 
 function setFlipsAndStars(){
   moveCounterLabel.innerText = "Flips: "+numberOfFlips;
-  emptyStar;
-  starOne.src = fullStar;
-  starTwo.src = fullStar;
-  starThree.src = fullStar;
+    //set star using a loop.  grab all star element list. variable is 3,2,1,0.
+    // if index <= variable, fill star
+  let numberOfStars = 0;
+  switch (true){
+    case (numberOfFlips < 24):
+      numberOfStars = 3;
+      break;
+    case (numberOfFlips < 30 ):
+      numberOfStars = 2;
+      break;
+    case (numberOfFlips < 36):
+      numberOfStars = 1;
+      break;
+    case (numberOfFlips >= 36 ):
+      numberOfStars = 0;
+      break;
+    }
+
+  for( let i=0; i < starElements.length; ++i){
+    if (i < numberOfStars){
+      starElements[i].src = fullStar;
+    } else {
+      starElements[i].src = emptyStar;
+
+    }
+  }
 }
 
 //sets up new game
