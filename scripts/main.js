@@ -8,12 +8,16 @@ import eyes from '../images/eyes.svg';
 import circleX from '../images/circleX.svg';
 import body from '../images/body.svg';
 import turn from '../images/turn.svg';
+import emptyStar from '../images/emptyStar.svg';
+import fullStar from '../images/fullStar.svg';
 
 
 let main = document.querySelector('#main');
+let starOne = document.querySelector('#starOne');
+let starTwo = document.querySelector('#starTwo');
+let starThree = document.querySelector('#starThree');
 // let gameInfo = document.querySelector('#gameInfo');
 let cardsFragment = document.createDocumentFragment();
-
 
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
 
@@ -197,7 +201,15 @@ function dealCards(cardNumber, index) {
   cardsFragment.appendChild(cardElement);
 }
 
-shuffleCards();
+function setStars(){
+  emptyStar;
+  starOne.src = fullStar;
+  starTwo.src = fullStar;
+  starThree.src = fullStar;  
+}
 
+//sets up new game
+shuffleCards();
 allCards.forEach(dealCards);
 main.appendChild(cardsFragment);
+setStars();
