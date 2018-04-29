@@ -13,13 +13,14 @@ import fullStar from '../images/fullStar.svg';
 
 
 let main = document.querySelector('#main');
-// let starOne = document.querySelector('#starOne');
-// let starTwo = document.querySelector('#starTwo');
-// let starThree = document.querySelector('#starThree');
 let moveCounterLabel = document.querySelector('#moveCounterLabel');
 let starElements = document.querySelectorAll('.star');
+let restartButton = document.querySelector('#restart');
 
-// let gameInfo = document.querySelector('#gameInfo');
+restartButton.addEventListener('click', function(){
+  startGame();
+});
+
 let cardsFragment = document.createDocumentFragment();
 
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
@@ -54,8 +55,13 @@ function getRandomInt() {
 
 //function to generate random allCards array
 function shuffleCards () {
+  // empty the array for restart situations
+  allCards = new Array (16);
+  numberOfFlips = 0;
   for (let i=0; i<2; ++i){
     for(let c=1; c<9; ++c){
+      //c refers to the card that should be slotted into the array.
+      //c is being slotted randomly into the array (which creates random locations of cards in the css grid
       let arrayIndex = getRandomInt();
       while (allCards[arrayIndex] !== undefined){
         arrayIndex = getRandomInt();
@@ -66,8 +72,14 @@ function shuffleCards () {
 }
 
 function resetCards (){
-  firstCardFlipped.cardDiv.classList.toggle('flip');
-  secondCardFlipped.cardDiv.classList.toggle('flip');
+  let firstCardClassList = firstCardFlipped.cardDiv.classList;
+  let secondCardClassList = secondCardFlipped.cardDiv.classList;
+  if (firstCardClassList.contains('flip')) {
+    firstCardClassList.toggle('flip');
+  }
+  if (secondCardClassList.contains('flip')){
+    secondCardClassList.toggle('flip');
+  }
   firstCardFlipped.reset();
   secondCardFlipped.reset();
 }
@@ -241,8 +253,12 @@ function setFlipsAndStars(){
   }
 }
 
-//sets up new game
-shuffleCards();
-allCards.forEach(dealCards);
-main.appendChild(cardsFragment);
-setFlipsAndStars();
+function startGame(){
+  //sets up new game
+  shuffleCards();
+  allCards.forEach(dealCards);
+  main.appendChild(cardsFragment);
+  setFlipsAndStars();
+}
+
+startGame();
