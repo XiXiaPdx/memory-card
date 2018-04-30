@@ -26,6 +26,7 @@ let cardsFragment = document.createDocumentFragment();
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
 
 let allCards = new Array (16);
+let matchedOutCards;
 let gridAreaArray = "ABCDEFGHIJKLMNOP".split("");
 
 //track state of game, store first and second card flipped
@@ -69,6 +70,7 @@ function shuffleCards () {
       allCards[arrayIndex] = c;
     }
   }
+  matchedOutCards = allCards;
 }
 
 function resetCards (){
@@ -120,9 +122,22 @@ function matchFound(firstCard, secondCard){
    firstCard.cardDiv.children[i].removeEventListener('click', matchCard);
    secondCard.cardDiv.children[i].removeEventListener('click', matchCard);
  }
+ //remove matched cards from allCards array by using their cardFaceValue
+ matchedOutCards = matchedOutCards.filter(removeMatched(firstCard.cardFaceValue));
  //reset cards, otherwise no cards can be flipped after a match
  firstCard.reset();
  secondCard.reset();
+ //check for all cards removeMatched
+ console.log(matchedOutCards.length);
+ if(matchedOutCards.length === 0) {
+   startGame();
+ }
+}
+
+function removeMatched (cardValue){
+  return function (eachCardToBeFiltered){
+    return eachCardToBeFiltered !== cardValue;
+  }
 }
 
 function findCardFlipped (cardElement){
@@ -259,6 +274,7 @@ function startGame(){
   allCards.forEach(dealCards);
   main.appendChild(cardsFragment);
   setFlipsAndStars();
+  console.log(allCards);
 }
 
 startGame();
