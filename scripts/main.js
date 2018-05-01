@@ -18,6 +18,8 @@ let starElements = document.querySelectorAll('.star');
 let restartButton = document.querySelector('#restart');
 
 restartButton.addEventListener('click', function(){
+  //remove all cards from DOM
+  Array.from(main.children).forEach(removeCardFromDom);
   startGame();
 });
 
@@ -48,6 +50,13 @@ let secondCardFlipped = new CardFlipped();
 
 //flip moves
 let numberOfFlips = 0;
+
+//remove card from DOM upon restartButton
+function removeCardFromDom(cardElement){
+  if (cardElement.classList.contains('cardContainer')){
+    cardElement.remove();
+  }
+}
 
 //random number
 function getRandomInt() {
@@ -128,7 +137,6 @@ function matchFound(firstCard, secondCard){
  firstCard.reset();
  secondCard.reset();
  //check for all cards removeMatched
- console.log(matchedOutCards.length);
  if(matchedOutCards.length === 0) {
    startGame();
  }
@@ -274,7 +282,6 @@ function startGame(){
   allCards.forEach(dealCards);
   main.appendChild(cardsFragment);
   setFlipsAndStars();
-  console.log(allCards);
 }
 
 startGame();
