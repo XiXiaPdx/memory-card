@@ -76,3 +76,9 @@ img {
   transition-delay: 0.6s;
   transform: rotateX(80deg);
 }
+
+.match {
+  transition: all 0.2s linear;
+  transition-delay: 0.4s;
+  transform: rotateZ(1deg);
+}

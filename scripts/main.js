@@ -133,9 +133,6 @@ function matchFound(firstCard, secondCard){
  }
  //remove matched cards from allCards array by using their cardFaceValue
  matchedOutCards = matchedOutCards.filter(removeMatched(firstCard.cardFaceValue));
- //reset cards, otherwise no cards can be flipped after a match
- firstCard.reset();
- secondCard.reset();
  //check for all cards removeMatched
  if(matchedOutCards.length === 0) {
    startGame();
@@ -186,7 +183,7 @@ function flipCard (cardElement){
 
     //check if two cards match
     if (firstCardFlipped.cardFaceValue === secondCardFlipped.cardFaceValue) {
-    //remove the match card click listner
+    cardElement.addEventListener('transitionend', matchSpin);
     matchFound(firstCardFlipped, secondCardFlipped);
 
     } else {
@@ -195,6 +192,22 @@ function flipCard (cardElement){
     cardElement.addEventListener('transitionend', delayFlip);
 
     }
+  }
+}
+
+let matchSpin = function (e){
+  let cardElement = e.srcElement
+  if(!cardElement.classList.contains('match')){
+    firstCardFlipped.cardDiv.classList.toggle('match');
+    cardElement.classList.toggle('match');
+  } else {
+    //spin transition has happened
+    cardElement.removeEventListener('transitionend', matchSpin);
+    cardElement.classList.toggle('match');
+    firstCardFlipped.cardDiv.classList.toggle('match');
+    //reset cards, otherwise no cards can be flipped after a match
+    firstCardFlipped.reset();
+    secondCardFlipped.reset();
   }
 }
 
