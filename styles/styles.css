@@ -24,7 +24,7 @@ body {
 }
 
 #gameOverModal {
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -46,6 +46,8 @@ body {
   border-radius: 20px;
   top: 50%;
   transform: translateY(-50%);
+  font-size: 5em;
+  text-align: center;
 }
 #gameInfo {
   grid-area: h0;

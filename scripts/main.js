@@ -195,6 +195,21 @@ function flipCard (cardElement){
     } else {
     // the cards don't match. flip them back.
     //second card, add end of aninmation listner to delay the flip back
+
+    let delayFlip = function (e){
+      let cardElement = e.srcElement
+      if(!cardElement.classList.contains('delay')){
+        cardElement.classList.toggle('delay');
+        firstCardFlipped.cardDiv.classList.toggle('delay');
+      } else {
+        //delay transition has happened
+        cardElement.removeEventListener('transitionend', delayFlip);
+        cardElement.classList.toggle('delay');
+        firstCardFlipped.cardDiv.classList.toggle('delay');
+        resetCards();
+      }
+    }
+
     cardElement.addEventListener('transitionend', delayFlip);
 
     }
@@ -214,20 +229,6 @@ let matchSpin = function (e){
     //reset cards, otherwise no cards can be flipped after a match
     firstCardFlipped.reset();
     secondCardFlipped.reset();
-  }
-}
-
-let delayFlip = function (e){
-  let cardElement = e.srcElement
-  if(!cardElement.classList.contains('delay')){
-    cardElement.classList.toggle('delay');
-    firstCardFlipped.cardDiv.classList.toggle('delay');
-  } else {
-    //delay transition has happened
-    cardElement.removeEventListener('transitionend', delayFlip);
-    cardElement.classList.toggle('delay');
-    firstCardFlipped.cardDiv.classList.toggle('delay');
-    resetCards();
   }
 }
 
