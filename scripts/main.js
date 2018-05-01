@@ -16,11 +16,16 @@ let main = document.querySelector('#main');
 let moveCounterLabel = document.querySelector('#moveCounterLabel');
 let starElements = document.querySelectorAll('.star');
 let restartButton = document.querySelector('#restart');
+let gameOverModal = document.querySelector('#gameOverModal');
 
 restartButton.addEventListener('click', function(){
   //remove all cards from DOM
   Array.from(main.children).forEach(removeCardFromDom);
   startGame();
+});
+
+gameOverModal.addEventListener('click', function (){
+  gameOverModal.style.display = 'none';
 });
 
 let cardsFragment = document.createDocumentFragment();
@@ -135,7 +140,8 @@ function matchFound(firstCard, secondCard){
  matchedOutCards = matchedOutCards.filter(removeMatched(firstCard.cardFaceValue));
  //check for all cards removeMatched
  if(matchedOutCards.length === 0) {
-   startGame();
+   gameOverModal.style.display = 'block';
+   // startGame();
  }
 }
 
