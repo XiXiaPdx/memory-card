@@ -22,7 +22,7 @@ module.exports = {
             {from:'images',to:'images'}
         ]),
     new HtmlWebpackPlugin({
-      title:'Portfolio',
+      title:'Memory',
       template: './index.html',
       inject: 'body',
       minify: {
