@@ -17,17 +17,6 @@ let moveCounterLabel = document.querySelector('#moveCounterLabel');
 let starElements = document.querySelectorAll('.star');
 let restartButton = document.querySelector('#restart');
 let gameOverModal = document.querySelector('#gameOverModal');
-
-restartButton.addEventListener('click', function(){
-  //remove all cards from DOM
-  Array.from(main.children).forEach(removeCardFromDom);
-  startGame();
-});
-
-gameOverModal.addEventListener('click', function (){
-  gameOverModal.style.display = 'none';
-});
-
 let cardsFragment = document.createDocumentFragment();
 
 //8 pairs of cards randomized.  Take numbers 1 to 8, place randomly into array, twice.
@@ -56,12 +45,27 @@ let secondCardFlipped = new CardFlipped();
 //flip moves
 let numberOfFlips = 0;
 
+let playAgain = function () {
+  //remove all cards from DOM
+  Array.from(main.children).forEach(removeCardFromDom);
+  startGame();
+}
+
+
 //remove card from DOM upon restartButton
 function removeCardFromDom(cardElement){
   if (cardElement.classList.contains('cardContainer')){
     cardElement.remove();
   }
 }
+
+restartButton.addEventListener('click', playAgain);
+
+gameOverModal.addEventListener('click', function (){
+  gameOverModal.style.display = 'none';
+  playAgain();
+
+});
 
 //random number
 function getRandomInt() {
