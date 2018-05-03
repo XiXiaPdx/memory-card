@@ -234,7 +234,8 @@ let matchSpin = function (e){
 
 let matchCard = function matchCard(e){
   //flip the card
-  flipCard(e.path[1]);
+
+  flipCard(e.srcElement.parentElement);
 }
 
 function createCard(cardImage){

@@ -91,6 +91,7 @@ img {
 }
 
 .cardContainer {
+  /* pointer-events: none; */
   -webkit-transform-origin: right center;/*safari*/
   -webkit-transform-style: preserve-3d;/*safari*/
   -webkit-transition: all 0.2s linear;/*safari*/
