@@ -20,6 +20,7 @@ body {
   "I J K L"
   "M N O P";
   font-size: 3em;
+  -webkit-perspective: 800px;
   perspective: 800px;
 }
 
@@ -83,6 +84,9 @@ img {
 
 .back {
   backface-visibility: hidden;
+  -webkit-perspective: 0; /* to hide back in Safari */
+   -webkit-backface-visibility: hidden; /* to hide back in Safari */
+   -webkit-transform: translate3d(0,0,0); /* to hide back in Safari */
 }
 
 
